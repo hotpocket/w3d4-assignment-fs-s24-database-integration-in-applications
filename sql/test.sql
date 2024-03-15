@@ -8,7 +8,7 @@
 
 SELECT "Resetting database";
 PRAGMA writable_schema = 1;
-delete from sqlite_master where type in ('table', 'index', 'trigger');
+delete from sqlite_master where type in ("table", "index", "trigger");
 PRAGMA writable_schema = 0;
 
 SELECT "Turning on foreign keys";
@@ -20,14 +20,16 @@ SELECT "Creating tables";
 .read sql/comment.sql
 
 SELECT "Inserting data";
-INSERT INTO user (username, password) VALUES ('admin5', '$uper$ecret0MG!');
-INSERT INTO comment (user_id, data) VALUES (1, 'This is a comment by admin5');
-INSERT INTO user (username, password) VALUES ('user7', '$uper$ecret');
-INSERT INTO comment (user_id, data) VALUES (2, 'This is a comment by user7');
+INSERT INTO user (username, password) VALUES ("admin5", "$uper$ecret0MG!");
+INSERT INTO post (user_id, content) VALUES (1, "post1 - Eye NO th!ngs, truest meee  -admin5");
+INSERT INTO comment (post_id, data) VALUES (1, "comment1 - I don't believe your lies admin5");
+INSERT INTO user (username, password) VALUES ("user7", "$uper$ecret");
+INSERT INTO comment (post_id, data) VALUES (2, "This is a comment by user7");
 
-SELECT "Created:";
+SELECT "INSERTs done:";
 .mode box
 SELECT * FROM user;
+SELECT * FROM post;
 SELECT * FROM comment;
 .mode box
 

@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "mydb",
+      "database": "${workspaceFolder:w3d4-assignment-fs-s24-database-integration-in-applications}/my.db"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}

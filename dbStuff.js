@@ -18,14 +18,12 @@ function all(sql) {
 
 // run our sql
 async function main() {
-  // create the tables and seed them with data
   console.log("\nCREATING TABLES & SEEDING WITH DATA ...");
   let files = ["test_drop", "user", "post", "comment", "test_insert"]
   for (let i = 0; i < files.length; i++) {
     await exec(fs.readFileSync(`sql/${files[i]}.sql`).toString());
   }
 
-  // read/select all the records from all these tables
   console.log("\nREADING TABLE DATA...");
   let tables = ['user', 'post', 'comment']
   for(let i = 0; i < tables.length; i++) {
@@ -35,18 +33,15 @@ async function main() {
     });
   }
 
-  // demo a sql join of all tables
+  console.log("\nJOIN RESULTS...");
   let joinQuery = "SELECT user.id, user.username, post.id, post.post_text, comment.comment_text " +
     "FROM user " +
     "JOIN post ON user.id = post.user_id " +
     "JOIN comment ON comment.post_id = comment.id " +
     "WHERE user.id = (SELECT max(id) FROM user);"
-
-  console.log("\nJOIN RESULTS...");
   await all(joinQuery).then(rows => {
     rows.forEach((row) => console.log(row));
   });
-
 }
 
 main();
